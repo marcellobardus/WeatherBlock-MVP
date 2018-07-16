@@ -1,0 +1,67 @@
+namespace org.acme.weatherBlocks
+
+asset Sensor identified by sensorId {
+  o String sensorId
+  o String latitude
+  o String longitude
+}
+
+/***
+Types of data points:
+  o Double airHumidity // in %
+  o Double soilHumidity // in %
+  o Double temperature // in °C
+  o Double airPressure // in hPa
+  o Double rainFall // in mm
+ */
+
+/**
+ * An abstract transaction that is related to a sensor
+ */
+abstract transaction SensorReadingTransaction {
+    --> Sensor sensor
+    o String ReadingTime //ideally TimeStamp
+}
+
+transaction TemperatureReading extends SensorReadingTransaction{
+  o Double temperature
+}
+
+transaction PressureReading extends SensorReadingTransaction{
+  o Double pressure
+}
+
+transaction AirHumidityReading extends SensorReadingTransaction{
+  o Double airHumidity
+}
+
+transaction SoilHumidityReading extends SensorReadingTransaction{
+  o Double soilHumidity
+}
+
+
+
+
+
+
+
+/**
+ * An abstract participant type in this business network
+ */
+abstract participant Business identified by email {
+  o String email
+  o Double accountBalance
+}
+
+/**
+ * A Farmer is a type of participant in the network, typically the buyer of the contract
+ */
+participant Farmer extends Business {
+}
+
+/**
+ * An Underwriter is a type of participant in the network, typically seller of the contract, calculating also the price of the contract based on his pricing model
+ */
+participant Underwriter extends Business {
+}
+
