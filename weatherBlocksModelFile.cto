@@ -6,7 +6,37 @@ asset Contract identified by contractId {
   --> Underwriter seller
   o Double premium
   o Double notional
+  o SensorData[] dataPoints
 }
+
+asset Sensor identified by sensorId {
+  o String sensorId
+  o String latitude
+  o String longitude
+  o SensorData[] dataPoints
+}
+
+asset SensorData identified by dataSetName {
+  o String dataSetName
+  o String TimeStamp
+  o DataType type
+  o Double value
+}
+
+enum DataType {
+  o AIR_HUMIDITY
+  o SOIL_HUMIDITY
+  o TEMPERATURE
+  o AIR_PRESSURE
+  o RAIN_FALL
+}
+
+enum ContractStatus {
+  o LIVE // after initiation
+  o DEAD // when time-out event occured
+  o SETTLED // when pay-out event occured
+}
+
 
 event ContractTimeOut {
   o String TimeStamp
@@ -50,14 +80,6 @@ transaction AirHumidityReading extends SensorReadingTransaction{
 transaction SoilHumidityReading extends SensorReadingTransaction{
   o Double soilHumidity
 }
-
-participant Sensor identified by sensorId {
-  o String sensorId
-  o String latitude
-  o String longitude
-}
-
-
 
 
 /**
