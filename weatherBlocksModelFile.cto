@@ -1,5 +1,11 @@
 namespace org.dltcamp.weatherBlocks
-
+/**
+  The smart contract that pays out the insurance @param notional in case the conditions are met:
+  IF on any day in between @param start and @param end the average daily temperature on the @param observedSensor is above the threshold, then pay the @param notional from the @param seller to the @param buyer
+  ELSE
+    do nothing
+  ENDIF
+ */
 asset Contract identified by contractId {
   o String contractId
   --> Farmer buyer //seeks protection
@@ -7,6 +13,7 @@ asset Contract identified by contractId {
   --> Sensor observedSensor
   o Double premium
   o Double notional
+  o Double threshold
   o DateTime start
   o DateTime end
   o ContractStatus status
@@ -27,7 +34,7 @@ asset Sensor identified by sensorId {
 }
 
 concept SensorData {
-  o DateTime TimeStamp
+  o DateTime time
   o DataType type
   o Double value
 }
