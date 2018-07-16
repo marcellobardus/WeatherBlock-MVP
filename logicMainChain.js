@@ -1,6 +1,6 @@
 /**
  * A temperature reading has been received for a shipment
- * @param {org.dltcamp.weatherBlocks} temperatureReading - the TemperatureReading transaction
+ * @param {org.dltcamp.weatherBlocks} sensorReading - the TemperatureReading transaction
  * @transaction
  */
 function sensorReading(sensorReading) {
@@ -27,7 +27,12 @@ function sensorReading(sensorReading) {
             });
     }
 
+//at 8PM iterate through each contract and call
+function checkPayout(contract){
+    // 1) get the sensor observed 
+    // iterate through its data points and calculate average temp for each day in time range
 
+}
 
 
     
