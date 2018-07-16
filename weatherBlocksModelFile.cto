@@ -1,10 +1,22 @@
-namespace org.acme.weatherBlocks
+namespace org.dltcamp.weatherBlocks
 
-asset Sensor identified by sensorId {
-  o String sensorId
-  o String latitude
-  o String longitude
+asset Contract identified by contractId {
+  o String contractId
+  --> Farmer buyer
+  --> Underwriter seller
+  o Double premium
+  o Double notional
 }
+
+event ContractTimeOut {
+  o String TimeStamp
+  --> Contract contract
+}
+
+event ContractPayOut {
+  --> Contract contract
+}
+
 
 /***
 Types of data points:
@@ -39,8 +51,11 @@ transaction SoilHumidityReading extends SensorReadingTransaction{
   o Double soilHumidity
 }
 
-
-
+participant Sensor identified by sensorId {
+  o String sensorId
+  o String latitude
+  o String longitude
+}
 
 
 
